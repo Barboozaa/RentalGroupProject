@@ -1,6 +1,6 @@
 # RentalGroupProject
 
-# Group Memebers
+# Group Members
 * Richard Fenix
 * Jordan Senken
 * Remington Bridgeman
