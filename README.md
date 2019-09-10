@@ -1,7 +1,7 @@
 # RentalGroupProject
 
-###Group Memebers
-*Richard Fenix
-*Jordan Senken
-*Remington Bridgeman
-*Wyatt Simpson
+# Group Memebers
+* Richard Fenix
+* Jordan Senken
+* Remington Bridgeman
+* Wyatt Simpson
