@@ -1,0 +1,279 @@
+openapi: 3.0.0
+info:
+  title: Rental Service
+  description: A web service that tracks rental invoices, products and customers
+  version: 0.0.1
+servers:
+  - url: 'http://localhost:3306'
+    description: Local dev server
+paths:
+  /customer/{customerId}:
+    get:
+      summary: retrieve one customer's information
+      parameters: 
+        - in: path
+          name: customerId
+          schema:
+            type: integer
+          required: true
+          description: Numeric ID of the customer
+      responses:
+        '200':
+          description: A customer object
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  customerId: 
+                    type: integer
+                    description: The customer id.
+                  first_name:
+                    type: string
+                    description: The customer's first name
+                  last_name:
+                    type: string
+                    description: The customer's last name
+                  email:
+                    type: string
+                    description: The customer's email
+                  company:
+                    type: string
+                    description: the customer's company name
+                  phone: 
+                    type: string
+                    description: the customer's phone number
+    delete:
+      summary: Delete a Customer
+      parameters: 
+        - in: path
+          name: customerId
+          schema:
+            type: integer
+          required: true
+          description: Numeric ID of the customer
+      responses:
+        '200':
+          description: Customer Deleted
+          
+  /customer:
+    post:
+      summary: Add a new customer
+      requestBody:
+        description: Customer Object
+        required: true
+        content:
+          application/json:
+              schema:
+                type: object
+                properties:
+                  customerId: 
+                    type: integer
+                    description: The customer id.
+                  first_name:
+                    type: string
+                    description: The customer's first name
+                  last_name:
+                    type: string
+                    description: The customer's last name
+                  email:
+                    type: string
+                    description: The customer's email
+                  company:
+                    type: string
+                    description: the customer's company name
+                  phone: 
+                    type: string
+                    description: the customer's phone number
+      responses:
+        '201':
+          description: Created
+    put:
+      summary: Update a Customer
+      requestBody:
+        content:
+          application/json:
+              schema:
+                type: object
+                properties:
+                  customerId: 
+                    type: integer
+                    description: The customer id.
+                  first_name:
+                    type: string
+                    description: The customer's first name
+                  last_name:
+                    type: string
+                    description: The customer's last name
+                  email:
+                    type: string
+                    description: The customer's email
+                  company:
+                    type: string
+                    description: the customer's company name
+                  phone: 
+                    type: string
+                    description: the customer's phone number
+      responses:
+        '200':
+          description: Updated
+  /item/{itemId}:
+    get:
+      summary: retrieve one item's information
+      parameters: 
+        - in: path
+          name: itemId
+          schema:
+            type: integer
+          required: true
+          description: Numeric ID of the item
+      responses:
+        '200':
+          description: A item object
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  itemId: 
+                    type: integer
+                    description: The item id.
+                  name:
+                    type: string
+                    description: The item's  name
+                  description:
+                    type: string
+                    description: The item's description
+                  dailyRate:
+                    type: number
+                    description: The item's daily rate
+  
+    delete:
+      summary: Delete an item
+      parameters: 
+        - in: path
+          name: itemId
+          schema:
+            type: integer
+          required: true
+          description: Numeric ID of the item
+      responses:
+        '200':
+          description: Item Deleted
+          
+  /item:
+    post:
+      summary: Add a new item
+      requestBody:
+        description: Item Object
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                itemId: 
+                  type: integer
+                  description: The item id.
+                name:
+                  type: string
+                  description: The item's  name
+                description:
+                  type: string
+                  description: The item's description
+                dailyRate:
+                  type: number
+                  description: The item's daily rate
+      responses:
+        '201':
+          description: Created Item
+
+          
+  /invoice/{invoiceId}:
+    delete:
+      summary: Delete an existing invoice and the associated invoice items
+      parameters: 
+        - in: path
+          name: invoiceId
+          schema:
+            type: integer
+          required: true
+          description: Numeric ID of the invoice
+      responses:
+        '200':
+          description: Invoice Deleted
+      
+  /invoice:
+    post:
+      summary: Add a new invoice
+      requestBody:
+        description: Invoice Object
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                invoiceId:
+                  type: integer
+                  description: The invoice id
+                customerId:
+                    type: integer
+                    description: The customer id 
+                orderDate:
+                    type: string
+                    format: date
+                    description: The date of purchase
+                pickupDate:
+                    type: string
+                    format: date
+                    description: The date of pickup
+                returnDate:
+                    type: string
+                    format: date
+                    description: The date the product must be returned bya
+                late_fee:
+                    type: number
+                    description: The amount of late fees on the invoice
+      responses:
+        '200':
+          description: Created Invoice
+  
+  /customer/{customerId}/invoices:
+    get:
+      summary: retrieve all invoices by customer
+      parameters: 
+        - in: path
+          name: customerId
+          schema:
+            type: integer
+          required: true
+          description: Numeric ID of the item
+      responses:
+        '200':
+          description: An array of Invoice objects
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties: 
+                    itemId: 
+                      type: integer
+                      description: The item id.
+                    name:
+                      type: string
+                      description: The item's  name
+                    description:
+                      type: string
+                      description: The item's description
+                    dailyRate:
+                      type: number
+                      description: The item's daily rate
+
+          
+      
+              
+          
+
