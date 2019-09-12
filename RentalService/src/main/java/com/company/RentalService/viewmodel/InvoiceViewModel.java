@@ -12,6 +12,7 @@ public class InvoiceViewModel {
 //    private LocalDate pickupDate;
 //    private LocalDate returnDate;
 //    private BigDecimal lateFee;
+//    private List<InvoiceItem> invoiceItemList;
 //    private List<Item> itemList;
 //
 //    public int getInvoiceId() {
@@ -62,6 +63,14 @@ public class InvoiceViewModel {
 //        this.lateFee = lateFee;
 //    }
 //
+//    public List<InvoiceItem> getInvoiceItemList() {
+//        return invoiceItemList;
+//    }
+//
+//    public void setInvoiceItemList(List<InvoiceItem> invoiceItemList) {
+//        this.invoiceItemList = invoiceItemList;
+//    }
+//
 //    public List<Item> getItemList() {
 //        return itemList;
 //    }
@@ -81,11 +90,12 @@ public class InvoiceViewModel {
 //                pickupDate.equals(that.pickupDate) &&
 //                returnDate.equals(that.returnDate) &&
 //                lateFee.equals(that.lateFee) &&
+//                invoiceItemList.equals(that.invoiceItemList) &&
 //                itemList.equals(that.itemList);
 //    }
 //
 //    @Override
 //    public int hashCode() {
-//        return Objects.hash(invoiceId, customer, orderDate, pickupDate, returnDate, lateFee, itemList);
+//        return Objects.hash(invoiceId, customer, orderDate, pickupDate, returnDate, lateFee, invoiceItemList, itemList);
 //    }
 }
