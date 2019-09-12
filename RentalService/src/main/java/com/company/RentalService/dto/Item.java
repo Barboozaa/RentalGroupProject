@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.util.Objects;
 
 public class Item {
+    // TODO Add validation for rest controller
     private int itemId;
     private String name;
     private String description;
