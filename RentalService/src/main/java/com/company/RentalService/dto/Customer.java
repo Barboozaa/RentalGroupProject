@@ -1,8 +1,11 @@
 package com.company.RentalService.dto;
 
+import com.sun.xml.internal.bind.v2.TODO;
+
 import java.util.Objects;
 
 public class Customer {
+    // TODO Add validation for rest controller
     private int customerId;
     private String firstName;
     private String lastName;
