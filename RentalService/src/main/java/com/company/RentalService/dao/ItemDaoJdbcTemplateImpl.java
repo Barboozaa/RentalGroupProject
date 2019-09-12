@@ -2,15 +2,35 @@ package com.company.RentalService.dao;
 
 import com.company.RentalService.dto.Item;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.List;
 
 @Repository
 public class ItemDaoJdbcTemplateImpl implements ItemDao {
     private JdbcTemplate jdbcTemplate;
 
+    private final static String INSERT_ITEM_SQL =
+            "INSERT INTO item (name, description, daily_rate) " +
+                    "VALUES (?, ?, ?)";
+
+    private final static String SELECT_ITEM_SQL =
+            "SELECT * FROM item WHERE item_id = ?";
+
+    private final static String SELECT_ALL_ITEM_SQL =
+            "SELECT * FROM item";
+
+    private final static String UPDATE_ITEM_SQL =
+            "UPDATE item " +
+                    "SET name = ?, description = ?, daily_rate = ? " +
+                    "WHERE item_id = ?";
+
+    private final static String DELETE_ITEM_SQL =
+            "DELETE FROM item WHERE item_id = ?";
 
     @Autowired
     public ItemDaoJdbcTemplateImpl(JdbcTemplate jdbcTemplate) {
@@ -19,26 +39,54 @@ public class ItemDaoJdbcTemplateImpl implements ItemDao {
 
     @Override
     public Item addItem(Item item) {
-        return null;
+        jdbcTemplate.update(INSERT_ITEM_SQL,
+                item.getName(),
+                item.getDescription(),
+                item.getDailyRate());
+        int id = jdbcTemplate.queryForObject("select LAST_INSERT_ID()", Integer.class);
+        item.setItemId(id);
+        return item;
     }
 
     @Override
     public Item getItem(int id) {
-        return null;
+        try {
+            return jdbcTemplate.queryForObject(SELECT_ITEM_SQL, this::mapRowToItem, id);
+        } catch (EmptyResultDataAccessException e) {
+            // if there is no Item object with this id, just return null
+            return null;
+        }
     }
 
     @Override
     public List<Item> getAllItem() {
-        return null;
+        return jdbcTemplate.query(SELECT_ALL_ITEM_SQL, this::mapRowToItem);
     }
 
     @Override
     public void updateItem(Item item) {
+        jdbcTemplate.update(UPDATE_ITEM_SQL,
+                item.getName(),
+                item.getDescription(),
+                item.getDailyRate(),
+                item.getItemId());
 
     }
 
     @Override
     public void deleteItem(int id) {
+        jdbcTemplate.update(DELETE_ITEM_SQL, id);
+
+    }
+
+    private Item mapRowToItem(ResultSet rs, int rowNum) throws SQLException {
+        Item item = new Item();
+        item.setItemId(rs.getInt("item_id"));
+        item.setName(rs.getString("first_name"));
+        item.setDescription(rs.getString("last_name"));
+        item.setDailyRate(rs.getBigDecimal("email"));
+
+        return item;
 
     }
 }
