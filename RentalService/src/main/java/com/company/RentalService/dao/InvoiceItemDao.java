@@ -12,7 +12,9 @@ public interface InvoiceItemDao {
 
     List<InvoiceItem> getAllInvoiceItem();
 
-    List<Item> getItemsByInvoiceItem(int invoiceItemId);
+
+    List<InvoiceItem> getInvoiceItemsByInvoice(int invoiceId);
+
 
     void updateInvoiceItem(InvoiceItem invoiceItem);
 

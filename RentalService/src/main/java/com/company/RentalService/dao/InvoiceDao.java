@@ -13,7 +13,6 @@ public interface InvoiceDao {
 
     List<Invoice> getAllInvoice();
 
-    List<InvoiceItem> getInvoiceItemsByInvoice(int invoiceId);
 
     void updateInvoice(Invoice invoice);
 
