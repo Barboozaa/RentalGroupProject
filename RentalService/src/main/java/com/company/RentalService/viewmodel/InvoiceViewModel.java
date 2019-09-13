@@ -17,7 +17,6 @@ public class InvoiceViewModel {
     private LocalDate returnDate;
     private BigDecimal lateFee;
     private List<InvoiceItem> invoiceItemList;
-    private List<Item> itemList;
 
     public int getInvoiceId() {
         return invoiceId;
@@ -75,14 +74,6 @@ public class InvoiceViewModel {
         this.invoiceItemList = invoiceItemList;
     }
 
-    public List<Item> getItemList() {
-        return itemList;
-    }
-
-    public void setItemList(List<Item> itemList) {
-        this.itemList = itemList;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -94,12 +85,11 @@ public class InvoiceViewModel {
                 pickupDate.equals(that.pickupDate) &&
                 returnDate.equals(that.returnDate) &&
                 lateFee.equals(that.lateFee) &&
-                invoiceItemList.equals(that.invoiceItemList) &&
-                itemList.equals(that.itemList);
+                invoiceItemList.equals(that.invoiceItemList);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(invoiceId, customer, orderDate, pickupDate, returnDate, lateFee, invoiceItemList, itemList);
+        return Objects.hash(invoiceId, customer, orderDate, pickupDate, returnDate, lateFee, invoiceItemList);
     }
 }
