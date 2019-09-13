@@ -5,7 +5,6 @@ import java.time.LocalDate;
 import java.util.Objects;
 
 public class Invoice {
-    // TODO Add validation for rest controller
     private int invoiceId;
     private int customerId;
     private LocalDate orderDate;
