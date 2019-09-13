@@ -4,7 +4,6 @@ import java.math.BigDecimal;
 import java.util.Objects;
 
 public class InvoiceItem {
-    // TODO Add validation for rest controller
     private int invoiceItemId;
     private int invoiceId;
     private int itemId;

@@ -1,13 +1,24 @@
 package com.company.RentalService.dto;
 
+import org.springframework.lang.Nullable;
+
+import javax.validation.constraints.Digits;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 import java.util.Objects;
 
 public class Item {
-    // TODO Add validation for rest controller
     private int itemId;
+
+    @NotBlank(message = "Please enter a Name")
     private String name;
+
+    @Nullable
     private String description;
+
+    @NotNull(message = "Please enter a Daily Rate")
+    @Digits(integer = 8, fraction = 2, message = "Please enter a correctly formatted Daily Rate")
     private BigDecimal dailyRate;
 
     public int getItemId() {
