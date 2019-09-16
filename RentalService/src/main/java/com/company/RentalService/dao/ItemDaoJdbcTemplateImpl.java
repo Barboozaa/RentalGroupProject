@@ -82,9 +82,9 @@ public class ItemDaoJdbcTemplateImpl implements ItemDao {
     private Item mapRowToItem(ResultSet rs, int rowNum) throws SQLException {
         Item item = new Item();
         item.setItemId(rs.getInt("item_id"));
-        item.setName(rs.getString("first_name"));
-        item.setDescription(rs.getString("last_name"));
-        item.setDailyRate(rs.getBigDecimal("email"));
+        item.setName(rs.getString("name"));
+        item.setDescription(rs.getString("description"));
+        item.setDailyRate(rs.getBigDecimal("daily_rate"));
 
         return item;
 

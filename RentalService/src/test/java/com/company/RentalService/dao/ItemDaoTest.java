@@ -10,7 +10,10 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import static org.junit.Assert.*;
 
+
+import java.math.BigDecimal;
 import java.util.List;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -52,22 +55,53 @@ public class ItemDaoTest {
     }
 
     @Test
-    public void addItem() {
-    }
+    public void addGetDeleteItem() {
+        Item item = new Item();
+        item.setName("Bike");
+        item.setDescription("2 wheels, basket in the front");
+        item.setDailyRate(new BigDecimal("2.00"));
+        item = itemDao.addItem(item);
 
-    @Test
-    public void getItem() {
+        Item item1 = itemDao.getItem(item.getItemId());
+        assertEquals(item, item1);
+
+        itemDao.deleteItem(item.getItemId());
+        Item item2 = itemDao.getItem(item.getItemId());
+        assertNull(item2);
     }
 
     @Test
     public void getAllItem() {
+        Item item = new Item();
+        item.setName("Bike");
+        item.setDescription("2 wheels, basket in the front");
+        item.setDailyRate(new BigDecimal("2.00"));
+        itemDao.addItem(item);
+        Item item2 = new Item();
+        item2.setName("Scooter");
+        item2.setDescription("2 wheels, goes beep beep");
+        item2.setDailyRate(new BigDecimal("5.00"));
+        itemDao.addItem(item2);
+
+        List<Item> itemList = itemDao.getAllItem();
+        assertEquals(2, itemList.size());
     }
 
     @Test
     public void updateItem() {
+        Item item = new Item();
+        item.setName("Bike");
+        item.setDescription("2 wheels, basket in the front");
+        item.setDailyRate(new BigDecimal("2.00"));
+        item = itemDao.addItem(item);
+        item.setName("Scooter");
+        item.setDescription("2 wheels, goes beep beep");
+        item.setDailyRate(new BigDecimal("5.00"));
+        itemDao.updateItem(item);
+
+        Item item1 = itemDao.getItem(item.getItemId());
+        assertEquals(item, item1);
+
     }
 
-    @Test
-    public void deleteItem() {
-    }
 }

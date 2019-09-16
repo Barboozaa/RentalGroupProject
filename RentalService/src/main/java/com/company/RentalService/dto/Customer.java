@@ -1,13 +1,26 @@
 package com.company.RentalService.dto;
 
+import com.sun.xml.internal.bind.v2.TODO;
+
+import javax.validation.constraints.NotBlank;
 import java.util.Objects;
 
 public class Customer {
     private int customerId;
+
+    @NotBlank(message = "Please enter a First Name")
     private String firstName;
+
+    @NotBlank(message = "Please enter a Last Name")
     private String lastName;
+
+    @NotBlank(message = "Please enter a Email")
     private String email;
+
+    @NotBlank(message = "Please enter a Company")
     private String company;
+
+    @NotBlank(message = "Please enter a Phone")
     private String phone;
 
     public int getCustomerId() {
