@@ -19,7 +19,7 @@ public class InvoiceItemDaoJdbcTemplateImpl implements InvoiceItemDao {
                     "VALUES (?, ?, ?, ?, ?)";
 
     private final static String SELECT_CUSTOMER_SQL =
-            "SELECT * FROM invoice_item WHERE invoice_item_id_id = ?";
+            "SELECT * FROM invoice_item WHERE invoice_item_id = ?";
 
     private final static String SELECT_ALL_CUSTOMER_SQL =
             "SELECT * FROM invoice_item";
@@ -94,7 +94,7 @@ public class InvoiceItemDaoJdbcTemplateImpl implements InvoiceItemDao {
 
     private InvoiceItem mapRowToInvoiceItem(ResultSet rs, int rowNum) throws SQLException {
         InvoiceItem invoiceItem = new InvoiceItem();
-        invoiceItem.setInvoiceItemId(rs.getInt("invoiceItem_id"));
+        invoiceItem.setInvoiceItemId(rs.getInt("invoice_Item_id"));
         invoiceItem.setInvoiceId(rs.getInt("invoice_id"));
         invoiceItem.setItemId(rs.getInt("item_id"));
         invoiceItem.setQuantity(rs.getInt("quantity"));
